@@ -7,6 +7,9 @@
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
     <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}" />
+    {{ if .IsHome }}
+    <link rel="stylesheet" href="{{ "css/carousel.css" | relURL }}" />
+    {{ end }}
     {{ partial "head_custom.html" . }}
   </head>
 
