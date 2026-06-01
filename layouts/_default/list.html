@@ -1,18 +1,29 @@
 {{ partial "header.html" . }}
 
-{{if not .IsHome }}
-<h1>{{ .Title | markdownify }}</h1>
+{{ if .IsHome }}
+<div class="home-hero">
+  <h2>{{ .Title | markdownify }}</h2>
+  {{ .Content }}
+</div>
+
+<div class="home-section-label">> recent_dispatches</div>
 {{ end }}
 
+{{if not .IsHome }}
+<h1>{{ .Title | markdownify }}</h1>
 {{ .Content }}
+{{ end }}
 
-<ul>
+<ul class="post-list">
   {{ $pages := .Pages }}
   {{ if .IsHome }}{{ $pages = .Site.RegularPages }}{{ end }}
   {{ range (where $pages "Section" "!=" "") }}
   <li>
-    <span class="date">{{ .Date.Format "2006/01/02" }}</span>
-    <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+    <a class="post-card" href="{{ .RelPermalink }}">
+      <div class="post-date">{{ .Date.Format "2006/01/02" }}</div>
+      <div class="post-title">{{ .Title | markdownify }}</div>
+      <div class="post-cta">read post →</div>
+    </a>
   </li>
   {{ end }}
 </ul>
